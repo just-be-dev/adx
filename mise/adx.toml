@@ -1,0 +1,11 @@
+# adx workstation tools — global mise drop-in.
+#
+# Symlinked to ~/.config/mise/conf.d/adx.toml by [dotfiles] in ../mise.toml.
+# mise loads conf.d/*.toml into the GLOBAL config, so these tools are active in
+# every directory (not just this repo) — without editing your personal
+# ~/.config/mise/config.toml.
+[tools]
+herdr = "latest"                  # github:ogulcancelik/herdr — terminal agent multiplexer
+neovim = "latest"                 # LazyVim runs on this
+hunk = "latest"                   # aqua:modem-dev/hunk — review-first diff viewer
+"npm:@kitlangton/ghui" = "latest" # GitHub PR TUI ("open in editor" -> nvim)

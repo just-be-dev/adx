@@ -1,0 +1,9 @@
+{
+  "theme": "system",
+  "systemThemeAutoReload": true,
+  "showScrollbars": false,
+  "editorCommand": "cd {{repoPath}} && gh pr checkout {{number}} && nvim -c \"DiffviewOpen {{baseRef}}...{{headRef}}\"",
+  "repoPaths": {
+    ":owner/:repo": "~/Code/:repo"
+  }
+}

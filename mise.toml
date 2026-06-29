@@ -1,0 +1,53 @@
+# adx — agentic-developer-experience
+#
+# Single entry point. From a clone, run:
+#
+#     mise trust -q && mise bootstrap --yes --force-dotfiles
+#
+# That symlinks every packaged config into ~/.config ([dotfiles]), installs the
+# global workstation tools (mise/adx.toml, linked into ~/.config/mise/conf.d),
+# and installs the Ghostty cask via the post-tools hook.
+#
+# `mise bootstrap` and the [dotfiles] section are experimental. min_version is
+# pinned to a known-good mise; bump it after `mise self-update`.
+min_version = "2026.6.14"
+
+[settings]
+# `mise bootstrap` and [dotfiles] are experimental — opt in here so the repo is
+# self-contained (no global setting required).
+experimental = true
+# String-form [dotfiles] entries below default to symlinks.
+dotfiles.default_mode = "symlink"
+
+# Workstation tools live in mise/adx.toml and are symlinked into
+# ~/.config/mise/conf.d/ (see [dotfiles] below) so they're GLOBALLY active,
+# not scoped to this repo. `mise bootstrap` installs them from the merged config.
+
+# ── Ghostty ────────────────────────────────────────────────────
+# mise has first-class Homebrew support (brew: / brew-cask:), but its cask
+# coverage is deliberately narrow (app/binary/pkg artifacts only). The ghostty
+# cask ships a `manpage` artifact mise rejects, so `brew-cask:ghostty` errors
+# and would abort the whole bootstrap. We install it via a guarded post-tools
+# hook against real Homebrew instead, and no-op cleanly when neither is present.
+[bootstrap.hooks.post-tools]
+run = '''
+if command -v ghostty >/dev/null 2>&1; then
+  echo "ghostty already installed"
+elif command -v brew >/dev/null 2>&1; then
+  brew install --cask ghostty
+else
+  echo "skip ghostty: install Homebrew, or download from https://ghostty.org"
+fi
+'''
+
+# ── Config symlinks ───────────────────────────────────────────────────────────
+# Sources resolve relative to this file (the repo root). `mise bootstrap` /
+# `mise dotfiles apply` create the links; existing real files are reported as
+# conflicts unless you pass --force-dotfiles.
+[dotfiles]
+"~/.config/mise/conf.d/adx.toml" = "mise/adx.toml"  # makes the tools above global
+"~/.config/herdr/config.toml" = "herdr/config.toml"
+"~/.config/nvim" = "nvim"
+"~/.config/ghostty/config" = "ghostty/config"
+"~/.config/ghui/config.json" = "ghui/config.json"
+"~/.config/hunk/config.toml" = "hunk/config.toml"

@@ -1,0 +1,14 @@
+# hunk configuration (managed by adx — agentic-developer-experience)
+# Review-first terminal diff viewer: https://github.com/modem-dev/hunk
+# Config reference: https://github.com/modem-dev/hunk#config
+
+theme = "auto"                 # built-in theme id, "auto" (match terminal bg), or "custom"
+mode = "auto"                  # auto | split | stack
+vcs = "git"                    # git | jj | sl  (auto-detected; override only if needed)
+watch = false                  # auto-reload as the working tree / files change
+exclude_untracked = false      # Git/Sapling working-tree `hunk diff` sessions only
+line_numbers = true
+wrap_lines = false
+menu_bar = true
+agent_notes = false            # inline AI / agent annotations beside the code
+transparent_background = false
