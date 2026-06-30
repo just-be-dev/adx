@@ -5,7 +5,8 @@
 # every directory (not just this repo) — without editing your personal
 # ~/.config/mise/config.toml.
 [tools]
-herdr = "latest"                  # github:ogulcancelik/herdr — terminal agent multiplexer
-neovim = "latest"                 # LazyVim runs on this
-hunk = "latest"                   # aqua:modem-dev/hunk — review-first diff viewer
-"npm:@kitlangton/ghui" = "latest" # GitHub PR TUI ("open in editor" -> nvim)
+herdr = "latest"                                 # github:ogulcancelik/herdr — terminal agent multiplexer
+neovim = "latest"                                # LazyVim runs on this
+hunk = "latest"                                  # aqua:modem-dev/hunk — review-first diff viewer
+"npm:@kitlangton/ghui" = "latest"                # GitHub PR TUI ("open in editor" -> nvim)
+"npm:@earendil-works/pi-coding-agent" = "latest" # pi — the agent harness (config tracked under pi/)

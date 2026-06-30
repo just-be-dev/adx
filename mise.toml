@@ -51,3 +51,7 @@ fi
 "~/.config/ghostty/config" = "ghostty/config"
 "~/.config/ghui/config.json" = "ghui/config.json"
 "~/.config/hunk/config.toml" = "hunk/config.toml"
+# pi (agent harness). Only non-secret config is tracked: settings.json and the
+# extensions dir. auth.json, sessions/, npm/, trust.json, etc. stay untracked.
+"~/.pi/agent/settings.json" = "pi/agent/settings.json"
+"~/.pi/agent/extensions" = "pi/agent/extensions"

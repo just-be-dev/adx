@@ -1,9 +1,9 @@
 # adx: Agentic Development Experience
 
-This is the configuration for the tools I use for agent driven development. 
+This is the configuration for the tools I use for agent driven development.
 
-I'm trending towards doing as much in the terminal as I can and biasing towards tools 
-with high levels of customizability. 
+I'm trending towards doing as much in the terminal as I can and biasing towards tools
+with high levels of customizability.
 
 Uses the fantasic [`mise`](https://mise.jdx.dev) to bootstrap everything.
 
@@ -16,11 +16,13 @@ Uses the fantasic [`mise`](https://mise.jdx.dev) to bootstrap everything.
 | `ghostty/config`    | [Ghostty](https://ghostty.org) | post-tools hook (`brew --cask`) | `~/.config/ghostty/config` |
 | `ghui/config.json`  | [ghui](https://github.com/kitlangton/ghui) | `mise/adx.toml` -> `npm:@kitlangton/ghui` | `~/.config/ghui/config.json` |
 | `hunk/config.toml`  | [hunk](https://github.com/modem-dev/hunk) | `mise/adx.toml` -> `hunk` | `~/.config/hunk/config.toml` |
+| `pi/agent/settings.json` | [pi](https://github.com/earendil-works/pi-coding-agent) | `mise/adx.toml` -> `npm:@earendil-works/pi-coding-agent` | `~/.pi/agent/settings.json` |
+| `pi/agent/extensions/`   | pi extensions | (config only) | `~/.pi/agent/extensions` |
 | `mise/adx.toml`     | (tool list) | — | `~/.config/mise/conf.d/adx.toml` |
 
 ### Global tools
 
-The CLI tools (herdr, neovim, hunk, ghui) are declared in
+The CLI tools (herdr, neovim, hunk, ghui, pi) are declared in
 [`mise/adx.toml`](./mise/adx.toml), which is symlinked to
 `~/.config/mise/conf.d/adx.toml`. mise loads `conf.d/*.toml` into the **global**
 config, so the tools are active in every directory, not just this repo, and
@@ -29,6 +31,12 @@ installs them from the merged config.
 
 Only config is tracked. Runtime files (logs, sockets, `state.json`, caches,
 `session.json`) stay out.
+
+For **pi**, only non-secret config is tracked: `settings.json` (preferences +
+package list) and the `extensions/` directory. Secrets and runtime state —
+`auth.json`, `sessions/`, `npm/`, `trust.json` — are deliberately left out. The
+pi binary itself is installed by `mise bootstrap` (via `mise/adx.toml`), but you
+still need to authenticate it yourself — `auth.json` is never tracked.
 
 ## Install
 
@@ -42,7 +50,7 @@ trusts the repo, and runs `mise bootstrap`. Re-running is safe:
 The bootstrap process...
 
 1. applies `[dotfiles]`, including the `conf.d/adx.toml` global-tools link,
-2. installs those tools (herdr, neovim, hunk, ghui) into the global config,
+2. installs those tools (herdr, neovim, hunk, ghui, pi) into the global config,
 3. runs the post-tools hook to install the Ghostty cask.
 
 `--force-dotfiles` is needed the first time because a real `~/.config/nvim`
