@@ -1,11 +1,11 @@
-# adx — agentic-developer-experience
+# workspace
 #
 # Single entry point. From a clone, run:
 #
 #     mise trust -q && mise bootstrap --yes --force-dotfiles
 #
 # That symlinks every packaged config into ~/.config ([dotfiles]), installs the
-# global workstation tools (mise/adx.toml, linked into ~/.config/mise/conf.d),
+# global workstation tools (mise/workspace.toml, linked into ~/.config/mise/conf.d),
 # and installs the Ghostty cask via the post-tools hook.
 #
 # `mise bootstrap` and the [dotfiles] section are experimental. min_version is
@@ -19,7 +19,7 @@ experimental = true
 # String-form [dotfiles] entries below default to symlinks.
 dotfiles.default_mode = "symlink"
 
-# Workstation tools live in mise/adx.toml and are symlinked into
+# Workstation tools live in mise/workspace.toml and are symlinked into
 # ~/.config/mise/conf.d/ (see [dotfiles] below) so they're GLOBALLY active,
 # not scoped to this repo. `mise bootstrap` installs them from the merged config.
 
@@ -45,7 +45,7 @@ fi
 # `mise dotfiles apply` create the links; existing real files are reported as
 # conflicts unless you pass --force-dotfiles.
 [dotfiles]
-"~/.config/mise/conf.d/adx.toml" = "mise/adx.toml"  # makes the tools above global
+"~/.config/mise/conf.d/workspace.toml" = "mise/workspace.toml" # makes the tools above global
 "~/.config/herdr/config.toml" = "herdr/config.toml"
 "~/.config/nvim" = "nvim"
 "~/.config/ghostty/config" = "ghostty/config"

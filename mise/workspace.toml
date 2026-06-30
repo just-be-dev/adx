@@ -1,6 +1,6 @@
-# adx workstation tools — global mise drop-in.
+# workspace workstation tools — global mise drop-in.
 #
-# Symlinked to ~/.config/mise/conf.d/adx.toml by [dotfiles] in ../mise.toml.
+# Symlinked to ~/.config/mise/conf.d/workspace.toml by [dotfiles] in ../mise.toml.
 # mise loads conf.d/*.toml into the GLOBAL config, so these tools are active in
 # every directory (not just this repo) — without editing your personal
 # ~/.config/mise/config.toml.

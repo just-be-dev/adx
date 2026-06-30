@@ -1,4 +1,4 @@
-# adx: Agentic Development Experience
+# workspace
 
 This is the configuration for the tools I use for agent driven development.
 
@@ -11,20 +11,20 @@ Uses the fantasic [`mise`](https://mise.jdx.dev) to bootstrap everything.
 
 | Path                | Tool | Installed by | Symlinked to |
 | ------------------- | ---- | ------------ | ------------ |
-| `herdr/config.toml` | [herdr](https://herdr.dev) | `mise/adx.toml` -> `herdr` | `~/.config/herdr/config.toml` |
-| `nvim/`             | [LazyVim](https://lazyvim.org) | `mise/adx.toml` -> `neovim` | `~/.config/nvim` |
+| `herdr/config.toml` | [herdr](https://herdr.dev) | `mise/workspace.toml` -> `herdr` | `~/.config/herdr/config.toml` |
+| `nvim/`             | [LazyVim](https://lazyvim.org) | `mise/workspace.toml` -> `neovim` | `~/.config/nvim` |
 | `ghostty/config`    | [Ghostty](https://ghostty.org) | post-tools hook (`brew --cask`) | `~/.config/ghostty/config` |
-| `ghui/config.json`  | [ghui](https://github.com/kitlangton/ghui) | `mise/adx.toml` -> `npm:@kitlangton/ghui` | `~/.config/ghui/config.json` |
-| `hunk/config.toml`  | [hunk](https://github.com/modem-dev/hunk) | `mise/adx.toml` -> `hunk` | `~/.config/hunk/config.toml` |
-| `pi/agent/settings.json` | [pi](https://github.com/earendil-works/pi-coding-agent) | `mise/adx.toml` -> `npm:@earendil-works/pi-coding-agent` | `~/.pi/agent/settings.json` |
+| `ghui/config.json`  | [ghui](https://github.com/kitlangton/ghui) | `mise/workspace.toml` -> `npm:@kitlangton/ghui` | `~/.config/ghui/config.json` |
+| `hunk/config.toml`  | [hunk](https://github.com/modem-dev/hunk) | `mise/workspace.toml` -> `hunk` | `~/.config/hunk/config.toml` |
+| `pi/agent/settings.json` | [pi](https://github.com/earendil-works/pi-coding-agent) | `mise/workspace.toml` -> `npm:@earendil-works/pi-coding-agent` | `~/.pi/agent/settings.json` |
 | `pi/agent/extensions/`   | pi extensions | (config only) | `~/.pi/agent/extensions` |
-| `mise/adx.toml`     | (tool list) | — | `~/.config/mise/conf.d/adx.toml` |
+| `mise/workspace.toml`     | (tool list) | — | `~/.config/mise/conf.d/workspace.toml` |
 
 ### Global tools
 
 The CLI tools (herdr, neovim, hunk, ghui, pi) are declared in
-[`mise/adx.toml`](./mise/adx.toml), which is symlinked to
-`~/.config/mise/conf.d/adx.toml`. mise loads `conf.d/*.toml` into the **global**
+[`mise/workspace.toml`](./mise/workspace.toml), which is symlinked to
+`~/.config/mise/conf.d/workspace.toml`. mise loads `conf.d/*.toml` into the **global**
 config, so the tools are active in every directory, not just this repo, and
 your personal `~/.config/mise/config.toml` stays untouched. `mise bootstrap`
 installs them from the merged config.
@@ -35,7 +35,7 @@ Only config is tracked. Runtime files (logs, sockets, `state.json`, caches,
 For **pi**, only non-secret config is tracked: `settings.json` (preferences +
 package list) and the `extensions/` directory. Secrets and runtime state —
 `auth.json`, `sessions/`, `npm/`, `trust.json` — are deliberately left out. The
-pi binary itself is installed by `mise bootstrap` (via `mise/adx.toml`), but you
+pi binary itself is installed by `mise bootstrap` (via `mise/workspace.toml`), but you
 still need to authenticate it yourself — `auth.json` is never tracked.
 
 ## Install
@@ -49,7 +49,7 @@ trusts the repo, and runs `mise bootstrap`. Re-running is safe:
 
 The bootstrap process...
 
-1. applies `[dotfiles]`, including the `conf.d/adx.toml` global-tools link,
+1. applies `[dotfiles]`, including the `conf.d/workspace.toml` global-tools link,
 2. installs those tools (herdr, neovim, hunk, ghui, pi) into the global config,
 3. runs the post-tools hook to install the Ghostty cask.
 

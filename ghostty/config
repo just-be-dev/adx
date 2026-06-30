@@ -1,4 +1,4 @@
-# Ghostty configuration (managed by adx — agentic-developer-experience)
+# Ghostty configuration (managed by workspace)
 
 # Make Shift+Enter insert a newline in TUI apps (pi, Claude Code, etc.).
 # By default Ghostty sends `[27;2;13~` for Shift+Enter, which these apps do
