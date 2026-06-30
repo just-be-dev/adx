@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 
 [keys]
@@ -66,6 +67,9 @@ edit_scrollback = ""
 # prefix+e: open nvim in a vertical (side-by-side) split.
 # pane split has no run-command flag, so we split (focusing the new pane),
 # grab the new pane id from the JSON response, then run nvim in it.
+# NOTE: parse result.pane.pane_id explicitly. A naive grep for "id" matches
+# the response envelope's "id":"cli:pane:split" first, yielding a bogus pane
+# id so "pane run" silently no-ops.
 [[keys.command]]
 key = "prefix+e"
 type = "shell"
@@ -73,7 +77,7 @@ description = "open nvim in a vertical split"
 command = '''
 B="${HERDR_BIN_PATH:-herdr}"
 out=$("$B" pane split --current --direction right --focus)
-pid=$(printf '%s' "$out" | grep -oE '"(pane_)?id" *: *"[^"]+"' | head -n1 | sed -E 's/.*"([^"]+)"$/\1/')
+pid=$(printf '%s' "$out" | jq -r '.result.pane.pane_id')
 [ -n "$pid" ] && "$B" pane run "$pid" nvim
 '''
 
@@ -137,6 +141,7 @@ pid=$(printf '%s' "$out" | grep -oE '"(pane_)?id" *: *"[^"]+"' | head -n1 | sed 
 
 # Background notification popup delivery
 agent_panel_scope = "all"
+show_agent_labels_on_pane_borders = true
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
@@ -145,6 +150,7 @@ agent_panel_scope = "all"
 # delivery = "off"
 # delay_seconds = 1
 
+delivery = "herdr"
 [ui.toast.herdr]
 # position = "bottom-right"
 
